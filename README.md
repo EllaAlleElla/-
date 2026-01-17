@@ -1,6 +1,8 @@
 # 向哨模拟器
 用twine sugarcube写的小游戏，打算缓慢更新。code基本是ai帮写的，自己敲了一部分能看懂的。
 
+你可以在这个链接在线玩：https://ellaalleella.github.io/Sentinel-Guide-Simulator/SGsimulator.html
+
 版本是sugarcube 2.37.3
 
 顾名思义，哨兵&向导世界观（Sentinel&Guide）。加入了奇妙的符合世界观设定（存疑）的异能。可自定义项有一点点多。
