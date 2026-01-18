@@ -67,7 +67,7 @@
 体能：<<button "加至最多">><<set $Endurance = 10000>><</button>><<button "增加一些">><<set $Endurance += 2000>><</button>><<button "减少一些">><<set $Endurance -= 2000>><</button>><<button "减至最少">><<set $Endurance = 0>><</button>>
 速度：<<button "加至最多">><<set $Speed = 10000>><</button>><<button "增加一些">><<set $Speed += 2000>><</button>><<button "减少一些">><<set $Speed -= 2000>><</button>><<button "减至最少">><<set $Speed = 0>><</button>>
 力量：<<button "加至最多">><<set $Strength = 10000>><</button>><<button "增加一些">><<set $Strength += 2000>><</button>><<button "减少一些">><<set $Strength -= 2000>><</button>><<button "减至最少">><<set $Strength = 0>><</button>>
-精神力：<<button "加至最多">><<set $SpiritualPowerLimit = 10000>><</button>><<button "增加一些">><<set $SpiritualPowerLimit += 2000>><</button>><<button "减少一些">><<set $SpiritualPowerLimit -= 2000>><</button>><<button "减至最少">><<set $SpiritualPowerLimit = 0>><</button>>
+精神力上限：<<button "加至最多">><<set $SpiritualPowerLimit = 10000>><</button>><<button "增加一些">><<set $SpiritualPowerLimit += 2000>><</button>><<button "减少一些">><<set $SpiritualPowerLimit -= 2000>><</button>><<button "减至最少">><<set $SpiritualPowerLimit = 0>><</button>>
 
 
 技能水平：
@@ -161,8 +161,11 @@ Miles：
 好感度：<<button "加至最多">><<set $FriendshipMiles = 100>><</button>><<button "增加一些">><<set $FriendshipMiles += 20>><</button>><<button "减少一些">><<set $FriendshipMiles -= 20>><</button>><<button "减至最少">><<set $FriendshipMiles = 0>><</button>>
 
 Terald：
+好感度：<<button "加至最多">><<set $FriendshipTerald = 100>><</button>><<button "增加一些">><<set $FriendshipTerald += 20>><</button>><<button "减少一些">><<set $FriendshipTerald -= 20>><</button>><<button "减至最少">><<set $FriendshipTerald = 0>><</button>>
 
 秦昭：
+好感度：<<button "加至最多">><<set $FriendshipRed = 100>><</button>><<button "增加一些">><<set $FriendshipRed += 20>><</button>><<button "减少一些">><<set $FriendshipRed -= 20>><</button>><<button "减至最少">><<set $FriendshipRed = 0>><</button>>
+
 
 [[确认|Player Dormitory]]
 
@@ -372,8 +375,12 @@ Terald：
 <<set $PlayerIsExperiencedGuideTeacher = false>>
 /*临时代哨兵课次数*/
 <<set $PlayerWorkAsSupplySentinelTeacher=0>>
+/*成功临时带哨兵课次数*/
+<<set $PlayerWorkAsSupplySentinelTeacherSucceed=0>>
 /*临时代向导课次数*/
 <<set $PlayerWorkAsSupplyGuideTeacher=0>>
+/*成功临时代向导课次数*/
+<<set $PlayerWorkAsSupplyGuideTeacherSucceed=0>>
 <</nobr>>
 在你看到这行字的时候，你已经重设了所有变量。
 

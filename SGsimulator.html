@@ -318,7 +318,7 @@ setup.statLimits = {
   PlayerKindness: [-100, 100],
   PlayerDefaultAttitude: [0, 5],
   PlayerReputation: [0, 100],
-  FriendshipSpiritAnimal: [0, 20],
+  FriendshipSpiritAnimal: [0, 100],
   FriendshipMiles: [0, 100],
   FriendshipTerald: [0, 100],
   FriendshipRed: [0, 100],
@@ -554,7 +554,7 @@ setup.calculateFinalRank = function(counts) {
 
 &lt;&lt;set $showHour = $hour&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Widgets" tags="widget" position="225,100" size="100,100">/*便捷设置带上限的新数值*/
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Widgets" tags="widget nobr" position="225,100" size="100,100">/*便捷设置带上限的新数值*/
 &lt;&lt;widget &quot;capStat&quot;&gt;&gt;
     &lt;&lt;set _name = _args[0]&gt;&gt;
     
@@ -580,6 +580,7 @@ setup.calculateFinalRank = function(counts) {
 
 /*显示数值变化*/
 &lt;&lt;widget &quot;showChange&quot;&gt;&gt;
+    &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set _label = _args[0]&gt;&gt;
     &lt;&lt;set _sign = _args[1]&gt;&gt;
     &lt;&lt;set _level = _args[2]&gt;&gt;
@@ -589,7 +590,8 @@ setup.calculateFinalRank = function(counts) {
     &lt;&lt;else&gt;&gt;
         &lt;&lt;set _symbol = &quot;-&quot;.repeat(_level)&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;span style=&quot;color: _color;&quot;&gt;（_symbol _label）&lt;/span&gt;
+    &lt;span @style=&quot;&#39;color: &#39; + _color + &#39;;&#39;&quot;&gt;（_symbol _label）&lt;/span&gt;
+    &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 /* 显示玩家评级 */
@@ -891,8 +893,12 @@ setup.calculateFinalRank = function(counts) {
 &lt;&lt;set $PlayerIsExperiencedGuideTeacher = false&gt;&gt;
 /*临时代哨兵课次数*/
 &lt;&lt;set $PlayerWorkAsSupplySentinelTeacher=0&gt;&gt;
+/*成功临时带哨兵课次数*/
+&lt;&lt;set $PlayerWorkAsSupplySentinelTeacherSucceed=0&gt;&gt;
 /*临时代向导课次数*/
-&lt;&lt;set $PlayerWorkAsSupplyGuideTeacher=0&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="StoryCaption" tags="noreturn" position="600,100" size="100,100">第$year年 $month月 $day日 -&lt;&lt;timeWidget&gt;&gt;
+&lt;&lt;set $PlayerWorkAsSupplyGuideTeacher=0&gt;&gt;
+/*成功临时代向导课次数*/
+&lt;&lt;set $PlayerWorkAsSupplyGuideTeacherSucceed=0&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="StoryCaption" tags="noreturn" position="600,100" size="100,100">第$year年 $month月 $day日 -&lt;&lt;timeWidget&gt;&gt;
 
 如果你遇到了问题，有可能是变量没有初始化。请点击下面的返回开始菜单按钮，在开始菜单更新变量。</tw-passagedata><tw-passagedata pid="6" name="StoryMenu" tags="noreturn" position="725,100" size="100,100">[[返回开始页面|Start]]</tw-passagedata><tw-passagedata pid="7" name="Start" tags="noreturn" position="850,100" size="100,100">[[开始游戏|Tower-Register-Start]]
 
@@ -1111,13 +1117,17 @@ setup.calculateFinalRank = function(counts) {
 &lt;&lt;if not def $PlayerIsExperiencedGuideTeacher&gt;&gt;&lt;&lt;set $PlayerIsExperiencedGuideTeacher = false&gt;&gt;&lt;&lt;/if&gt;&gt;
 /*临时代哨兵课次数*/
 &lt;&lt;if not def $PlayerWorkAsSupplySentinelTeacher&gt;&gt;&lt;&lt;set $PlayerWorkAsSupplySentinelTeacher=0&gt;&gt;&lt;&lt;/if&gt;&gt;
+/*成功临时带哨兵课次数*/
+&lt;&lt;if not def $PlayerWorkAsSupplySentinelTeacherSucceed&gt;&gt;&lt;&lt;set $PlayerWorkAsSupplySentinelTeacherSucceed=0&gt;&gt;&lt;&lt;/if&gt;&gt;
 /*临时代向导课次数*/
 &lt;&lt;if not def $PlayerWorkAsSupplyGuideTeacher&gt;&gt;&lt;&lt;set $PlayerWorkAsSupplyGuideTeacher=0&gt;&gt;&lt;&lt;/if&gt;&gt;
+/*成功临时带向导课次数*/
+&lt;&lt;if not def $PlayerWorkAsSupplyGuideTeacherSucceed&gt;&gt;&lt;&lt;set $PlayerWorkAsSupplyGuideTeacherSucceed=0&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 
 
 
-已经重置完成了。
+在你看到这行字的时候，你的缺失数据已经完成初始化了。
 &lt;&lt;/nobr&gt;&gt;
 
 &lt;&lt;link &quot;返回开始页面&quot;&gt;&gt;
@@ -1957,7 +1967,10 @@ setup.calculateFinalRank = function(counts) {
 
 “下次再不正脸看人，就不是踢一下桌子那么简单了。”你冷笑一声离去。
 &lt;&lt;/if&gt;&gt;
-[[先回宿舍吧|Player Dormitory]]</tw-passagedata><tw-passagedata pid="28" name="game-settings" tags="noreturn" position="975,350" size="100,100">你可以在这里更改游戏设置。
+&lt;&lt;link &quot;先回宿舍吧&quot;&gt;&gt;
+    &lt;&lt;setStat &quot;SpiritualPowerRemain&quot; += 10000&gt;&gt;
+    &lt;&lt;goto &quot;Player Dormitory&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="game-settings" tags="noreturn" position="975,350" size="100,100">你可以在这里更改游戏设置。
 
 启用特殊npc：游戏内存在一些特殊npc，他们每个都有各自独立的剧情和设置。对玩家来说可选的特质列表对特殊npc也生效。如果担心撞设定，可以选择关掉这个选项，但游戏内容会大大减少。
 
@@ -2022,7 +2035,7 @@ setup.calculateFinalRank = function(counts) {
 体能：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $Endurance = 10000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $Endurance += 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $Endurance -= 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $Endurance = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
 速度：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $Speed = 10000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $Speed += 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $Speed -= 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $Speed = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
 力量：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $Strength = 10000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $Strength += 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $Strength -= 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $Strength = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
-精神力：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit = 10000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit += 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit -= 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
+精神力上限：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit = 10000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit += 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit -= 2000&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $SpiritualPowerLimit = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 
 技能水平：
@@ -2106,6 +2119,21 @@ setup.calculateFinalRank = function(counts) {
 
 你对他人的友好程度：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $PlayerFriendliness += 200&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $PlayerFriendliness += 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $PlayerFriendliness -= 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $PlayerFriendliness += 200&gt;&gt;&lt;&lt;/button&gt;&gt;
 你乐于帮助他人的程度：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $PlayerKindness += 200&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $PlayerKindness += 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $PlayerKindness -= 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $PlayerKindness += 200&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+你和精神体的好感度：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $FriendshipSpiritAnimal = 100&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $FriendshipSpiritAnimal += 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $FriendshipSpiritAnimal -= 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $FriendshipSpiritAnimal = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+
+特殊npc：
+
+Miles：
+好感度：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $FriendshipMiles = 100&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $FriendshipMiles += 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $FriendshipMiles -= 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $FriendshipMiles = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+Terald：
+好感度：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $FriendshipTerald = 100&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $FriendshipTerald += 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $FriendshipTerald -= 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $FriendshipTerald = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+秦昭：
+好感度：&lt;&lt;button &quot;加至最多&quot;&gt;&gt;&lt;&lt;set $FriendshipRed = 100&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;增加一些&quot;&gt;&gt;&lt;&lt;set $FriendshipRed += 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减少一些&quot;&gt;&gt;&lt;&lt;set $FriendshipRed -= 20&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;减至最少&quot;&gt;&gt;&lt;&lt;set $FriendshipRed = 0&gt;&gt;&lt;&lt;/button&gt;&gt;
+
 
 [[确认|Player Dormitory]]</tw-passagedata><tw-passagedata pid="30" name="game-settings-reset all variables" tags="noreturn" position="1225,350" size="100,100">你确定要把所有数据初始化吗？
 
@@ -2308,10 +2336,14 @@ setup.calculateFinalRank = function(counts) {
 &lt;&lt;set $PlayerIsExperiencedGuideTeacher = false&gt;&gt;
 /*临时代哨兵课次数*/
 &lt;&lt;set $PlayerWorkAsSupplySentinelTeacher=0&gt;&gt;
+/*成功临时带哨兵课次数*/
+&lt;&lt;set $PlayerWorkAsSupplySentinelTeacherSucceed=0&gt;&gt;
 /*临时代向导课次数*/
 &lt;&lt;set $PlayerWorkAsSupplyGuideTeacher=0&gt;&gt;
+/*成功临时代向导课次数*/
+&lt;&lt;set $PlayerWorkAsSupplyGuideTeacherSucceed=0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-你已经重设了所有变量。
+在你看到这行字的时候，你已经重设了所有变量。
 
 [[返回游戏设置|game-settings]]</tw-passagedata><tw-passagedata pid="32" name="MilesButton" tags="" position="225,475" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;span id=&quot;miles-toggle&quot;&gt;
@@ -2636,7 +2668,157 @@ setup.calculateFinalRank = function(counts) {
 &lt;&lt;/if&gt;&gt;
 你重新回到自己原本的目的上。
 
-[[继续|Training Camp]]</tw-passagedata><tw-passagedata pid="47" name="Training Camp" tags="" position="850,600" size="100,100">你正在训练区。
+[[继续|Training Camp]]</tw-passagedata><tw-passagedata pid="47" name="Training Camp-Teaching" tags="" position="850,600" size="100,100">要做什么？
+
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $PlayerIsExperiencedSentinelTeacher === true&gt;&gt;
+    &lt;&lt;link &quot;给你的哨兵学生上课&quot;&gt;&gt;
+        &lt;&lt;goto &quot;Training Camp-Teaching&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $PlayerIsExperiencedGuideTeacher === true&gt;&gt;
+    &lt;&lt;link &quot;给你的向导学生上课&quot;&gt;&gt;
+        &lt;&lt;goto &quot;Training Camp-Teaching&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $PlayerWorkAsSupplyGuideTeacher === 0 &amp;&amp; $PlayerWorkAsSupplySentinelTeacher === 0&gt;&gt;
+    &lt;&lt;link &quot;作为哨兵的临时教官授课&quot;&gt;&gt;
+        &lt;&lt;set $PlayerWorkAsSupplySentinelTeacher += 1&gt;&gt;
+        &lt;&lt;goto &quot;Training Camp-SupplyTeaching-FirstTime-Sentinel&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+    &lt;&lt;link &quot;作为向导的临时教官授课&quot;&gt;&gt;
+        &lt;&lt;set $PlayerWorkAsSupplyGuideTeacher += 1&gt;&gt;
+        &lt;&lt;goto &quot;Training Camp-SupplyTeaching-FirstTime-Guide&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;link &quot;作为哨兵的临时教官授课&quot;&gt;&gt;
+        &lt;&lt;set $PlayerWorkAsSupplySentinelTeacher += 1&gt;&gt;
+        &lt;&lt;goto &quot;Training Camp-SupplyTeaching-Sentinel&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+    &lt;&lt;link &quot;作为向导的临时教官授课&quot;&gt;&gt;
+        &lt;&lt;set $PlayerWorkAsSupplyGuideTeacher += 1&gt;&gt;
+        &lt;&lt;goto &quot;Training Camp-SupplyTeaching-Guide&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+
+
+&lt;&lt;link &quot;返回&quot;&gt;&gt;
+    &lt;&lt;goto &quot;Training Camp&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="Training Camp-SupplyTeaching-FirstTime-Sentinel" tags="" position="975,600" size="100,100">你来到楼内的办公处，询问他们有没有什么地方需要临时代课的。
+
+“哨兵吗？”办公处的员工确认了一次，“今天有一群刚到的学员，要熟悉训练场。”
+
+“你带不带？”
+
+&lt;span style=&quot;opacity: 0.5&quot;&gt;在你作为教官积累足够的经验之前，你无法招收自己的学生，只能临时为一些人授课。
+
+如果你合格地完成了多次授课，你最终就可以获得招收自己学生的资格。由于为哨兵和向导教学分别需要不同的资质，你在两边累积的授课记录不能互通。
+
+你只有在职位为教官的情况下才可以招收自己的学生。尽管如此，在任何职业下，你都可以随时来帮助临时授课。
+
+本次作为教学，你可以百分百成功地累积一次授课经验。然而，之后的授课都需要你自己的能力发挥。
+
+如果你不想获得白送的成功次数，你可以选择拒绝任务。&lt;/span&gt;
+
+
+[[接受任务|Training Camp-SupplyTeaching-FirstTime-SentinelStart]]
+
+[[拒绝|Training Camp-SupplyTeaching-FirstTime-Decline]]</tw-passagedata><tw-passagedata pid="49" name="Training Camp-SupplyTeaching-FirstTime-SentinelStart" tags="" position="1100,600" size="100,100">你接受了任务，前往那位员工为你指的训练场。那里有一群无所事事的学生正在等待。
+
+你简单地带着他们走了一圈训练场。
+&lt;&lt;set _x to random(1,100)&gt;&gt;\
+&lt;&lt;if _x gte 40&gt;&gt;
+路过枪械训练区时，几个人忽然吵闹了起来，嚷嚷着要去秀一手。
+
+
+[[让他们去试试|Training Camp-SupplyTeaching-FirstTime-Sentinel-LetThemGo]]
+
+[[自己去试|Training Camp-SupplyTeaching-FirstTime-Sentinel-PlayerTry]]
+
+[[直接把他们领走|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]
+&lt;&lt;else&gt;&gt;
+他们对大部分事情都没什么反应，教学平静无波地结束了。
+
+
+[[继续|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="Training Camp-SupplyTeaching-FirstTime-Sentinel-LetThemGo" tags="" position="1225,600" size="100,100">他们彼此推搡着找到一个空位，每个人都轮流试了几次，没有任何一个人打中靶子。
+
+现在他们终于安静了。
+
+
+[[继续|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]</tw-passagedata><tw-passagedata pid="51" name="Training Camp-SupplyTeaching-FirstTime-Sentinel-PlayerTry" tags="" position="100,725" size="100,100">你没搭理他们，而是自己走到了一个空位前，他们都安静下来看你要做什么。
+
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set _x to random(1,50)&gt;&gt;
+&lt;&lt;if _x lte $GunSkillLevel&gt;&gt;
+你干净利落地一枪中了靶子。他们惊讶地大呼小叫，之后一路回去的路上，他们都还吵着要你的签名。
+&lt;&lt;else&gt;&gt;
+你连试了几枪，还是没打中。你无奈地放下枪，把后面那一群不停笑着的学生给带离了这里。
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+
+[[离开枪械训练区|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]</tw-passagedata><tw-passagedata pid="52" name="Training Camp-SupplyTeaching-FirstTime-SentinelResult" tags="" position="225,725" size="100,100">总之，这次教学没出任何意外。
+
+你回到楼内的办公处，员工确认那些学生没有任何问题后就在你的档案里加上了一次成功记录。
+
+
+&lt;&lt;link &quot;离开&quot;&gt;&gt;
+    &lt;&lt;set $PlayerWorkAsSupplySentinelTeacherSucceed += 1&gt;&gt;
+    &lt;&lt;goto &quot;Training Camp&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="Training Camp-SupplyTeaching-FirstTime-Guide" tags="" position="350,725" size="100,100">你来到楼内的办公处，询问他们有没有什么地方需要临时代课的。
+
+“向导吗？”办公处的员工确认了一次，“今天有一群刚到的学员，要学习基础理论知识。”
+
+“你带不带？”
+
+&lt;span style=&quot;opacity: 0.5&quot;&gt;在你作为教官积累足够的经验之前，你无法招收自己的学生，只能临时为一些人授课。
+
+如果你合格地完成了多次授课，你最终就可以获得招收自己学生的资格。由于为哨兵和向导教学分别需要不同的资质，你在两边累积的授课记录不能互通。
+
+你只有在职位为教官的情况下才可以招收自己的学生。尽管如此，在任何职业下，你都可以随时来帮助临时授课。
+
+本次作为教学，你可以百分百成功地累积一次授课经验。然而，之后的授课都需要你自己的能力发挥。
+
+如果你不想获得白送的成功次数，你可以选择拒绝任务。&lt;/span&gt;
+
+
+[[接受任务|Training Camp-SupplyTeaching-FirstTime-GuideStart]]
+
+[[拒绝|Training Camp-SupplyTeaching-FirstTime-Decline]]</tw-passagedata><tw-passagedata pid="54" name="Training Camp-SupplyTeaching-FirstTime-GuideStart" tags="" position="475,725" size="100,100">几分钟后，你走进了指定的教室。里面有一群向导学生正在无所事事地等待。
+
+你开始为他们讲解那些理论知识。都是些枯燥、无聊的东西，但因为它们很重要，你尽量让它们听起来有趣。
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set _x to random(1,50)&gt;&gt;
+&lt;&lt;if _x gt $CommunicateSkillLevel&gt;&gt;
+他们似乎不感兴趣，一边听一边打哈欠。你对此也没什么办法。
+&lt;&lt;else&gt;&gt;
+你的努力似乎起了效果。那些学生感兴趣的目光逐渐聚焦过来，津津有味地听着你的讲解。
+&lt;br&gt;&lt;br&gt;
+你对如何引起人们的注意有了更好的理解。&lt;&lt;setStat &quot;CommunicateSkillLevel&quot; +=3&gt;&gt;&lt;&lt;showChange &quot;语言沟通&quot; &quot;+&quot; 1 &quot;green&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+不知不觉间，课程时间就结束了。
+
+
+[[继续|Training Camp-SupplyTeaching-FirstTime-GuideResult]]</tw-passagedata><tw-passagedata pid="55" name="Training Camp-SupplyTeaching-FirstTime-GuideResult" tags="" position="600,725" size="100,100">你回到楼内的办公处。员工确认那些学生的确学到了预定的知识后，就在你的档案里加上了一次成功记录。
+
+
+&lt;&lt;link &quot;离开&quot;&gt;&gt;
+    &lt;&lt;set $PlayerWorkAsSupplyGuideTeacherSucceed += 1&gt;&gt;
+    &lt;&lt;goto &quot;Training Camp&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="Training Camp-SupplyTeaching-FirstTime-Decline" tags="" position="725,725" size="100,100">你拒绝了这次任务。她抬头奇怪地看了你一眼，但没说什么。
+
+你离开了。
+
+
+[[返回|Training Camp]]</tw-passagedata><tw-passagedata pid="57" name="Training Camp-SupplyTeaching-Sentinel" tags="" position="850,725" size="100,100"></tw-passagedata><tw-passagedata pid="58" name="Training Camp-SupplyTeaching-Guide" tags="" position="975,725" size="100,100"></tw-passagedata><tw-passagedata pid="59" name="Training Camp" tags="" position="1100,725" size="100,100">你正在训练区。
 
 室外广阔的开放场地主要是哨兵在用于日常训练，这里还有一些配备最新科技的模拟训练场，据说可以投影出不同敌人和场地，以供积攒实战经验使用。
 
@@ -2651,7 +2833,7 @@ setup.calculateFinalRank = function(counts) {
 &lt;&lt;/if&gt;&gt;\
 
 &lt;&lt;link &quot;我来提升自己&quot;&gt;&gt;\
-	&lt;&lt;goto &quot;Training Camp-Practice&quot;&gt;&gt;
+	&lt;&lt;goto &quot;Training Camp-Practicing&quot;&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &quot;我来协助教学&quot;&gt;&gt;

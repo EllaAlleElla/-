@@ -222,8 +222,12 @@
 <<if not def $PlayerIsExperiencedGuideTeacher>><<set $PlayerIsExperiencedGuideTeacher = false>><</if>>
 /*临时代哨兵课次数*/
 <<if not def $PlayerWorkAsSupplySentinelTeacher>><<set $PlayerWorkAsSupplySentinelTeacher=0>><</if>>
+/*成功临时带哨兵课次数*/
+<<if not def $PlayerWorkAsSupplySentinelTeacherSucceed>><<set $PlayerWorkAsSupplySentinelTeacherSucceed=0>><</if>>
 /*临时代向导课次数*/
 <<if not def $PlayerWorkAsSupplyGuideTeacher>><<set $PlayerWorkAsSupplyGuideTeacher=0>><</if>>
+/*成功临时带向导课次数*/
+<<if not def $PlayerWorkAsSupplyGuideTeacherSucceed>><<set $PlayerWorkAsSupplyGuideTeacherSucceed=0>><</if>>
 
 
 

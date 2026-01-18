@@ -196,5 +196,9 @@
 <<set $PlayerIsExperiencedGuideTeacher = false>>
 /*临时代哨兵课次数*/
 <<set $PlayerWorkAsSupplySentinelTeacher=0>>
+/*成功临时带哨兵课次数*/
+<<set $PlayerWorkAsSupplySentinelTeacherSucceed=0>>
 /*临时代向导课次数*/
 <<set $PlayerWorkAsSupplyGuideTeacher=0>>
+/*成功临时代向导课次数*/
+<<set $PlayerWorkAsSupplyGuideTeacherSucceed=0>>

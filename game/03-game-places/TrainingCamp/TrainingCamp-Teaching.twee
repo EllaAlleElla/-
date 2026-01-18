@@ -1,0 +1,174 @@
+:: Training Camp-Teaching
+要做什么？
+
+<<nobr>>
+<<if $PlayerIsExperiencedSentinelTeacher === true>>
+    <<link "给你的哨兵学生上课">>
+        <<goto "Training Camp-Teaching">>
+    <</link>>
+<br><br>
+<</if>>
+<<if $PlayerIsExperiencedGuideTeacher === true>>
+    <<link "给你的向导学生上课">>
+        <<goto "Training Camp-Teaching">>
+    <</link>>
+<br><br>
+<</if>>
+<<if $PlayerWorkAsSupplyGuideTeacher === 0 && $PlayerWorkAsSupplySentinelTeacher === 0>>
+    <<link "作为哨兵的临时教官授课">>
+        <<set $PlayerWorkAsSupplySentinelTeacher += 1>>
+        <<goto "Training Camp-SupplyTeaching-FirstTime-Sentinel">>
+    <</link>>
+<br><br>
+    <<link "作为向导的临时教官授课">>
+        <<set $PlayerWorkAsSupplyGuideTeacher += 1>>
+        <<goto "Training Camp-SupplyTeaching-FirstTime-Guide">>
+    <</link>>
+<br><br>
+<<else>>
+    <<link "作为哨兵的临时教官授课">>
+        <<set $PlayerWorkAsSupplySentinelTeacher += 1>>
+        <<goto "Training Camp-SupplyTeaching-Sentinel">>
+    <</link>>
+<br><br>
+    <<link "作为向导的临时教官授课">>
+        <<set $PlayerWorkAsSupplyGuideTeacher += 1>>
+        <<goto "Training Camp-SupplyTeaching-Guide">>
+    <</link>>
+<br><br>
+<</if>>
+<</nobr>>
+
+
+<<link "返回">>
+    <<goto "Training Camp">>
+<</link>>
+
+:: Training Camp-SupplyTeaching-FirstTime-Sentinel
+你来到楼内的办公处，询问他们有没有什么地方需要临时代课的。
+
+“哨兵吗？”办公处的员工确认了一次，“今天有一群刚到的学员，要熟悉训练场。”
+
+“你带不带？”
+
+<span style="opacity: 0.5">在你作为教官积累足够的经验之前，你无法招收自己的学生，只能临时为一些人授课。
+
+如果你合格地完成了多次授课，你最终就可以获得招收自己学生的资格。由于为哨兵和向导教学分别需要不同的资质，你在两边累积的授课记录不能互通。
+
+你只有在职位为教官的情况下才可以招收自己的学生。尽管如此，在任何职业下，你都可以随时来帮助临时授课。
+
+本次作为教学，你可以百分百成功地累积一次授课经验。然而，之后的授课都需要你自己的能力发挥。
+
+如果你不想获得白送的成功次数，你可以选择拒绝任务。</span>
+
+
+[[接受任务|Training Camp-SupplyTeaching-FirstTime-SentinelStart]]
+
+[[拒绝|Training Camp-SupplyTeaching-FirstTime-Decline]]
+:: Training Camp-SupplyTeaching-FirstTime-SentinelStart
+你接受了任务，前往那位员工为你指的训练场。那里有一群无所事事的学生正在等待。
+
+你简单地带着他们走了一圈训练场。
+<<set _x to random(1,100)>>\
+<<if _x gte 40>>
+路过枪械训练区时，几个人忽然吵闹了起来，嚷嚷着要去秀一手。
+
+
+[[让他们去试试|Training Camp-SupplyTeaching-FirstTime-Sentinel-LetThemGo]]
+
+[[自己去试|Training Camp-SupplyTeaching-FirstTime-Sentinel-PlayerTry]]
+
+[[直接把他们领走|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]
+<<else>>
+他们对大部分事情都没什么反应，教学平静无波地结束了。
+
+
+[[继续|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]
+<</if>>
+:: Training Camp-SupplyTeaching-FirstTime-Sentinel-LetThemGo
+他们彼此推搡着找到一个空位，每个人都轮流试了几次，没有任何一个人打中靶子。
+
+现在他们终于安静了。
+
+
+[[继续|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]
+:: Training Camp-SupplyTeaching-FirstTime-Sentinel-PlayerTry
+你没搭理他们，而是自己走到了一个空位前，他们都安静下来看你要做什么。
+
+<<nobr>>
+<<set _x to random(1,50)>>
+<<if _x lte $GunSkillLevel>>
+你干净利落地一枪中了靶子。他们惊讶地大呼小叫，之后一路回去的路上，他们都还吵着要你的签名。
+<<else>>
+你连试了几枪，还是没打中。你无奈地放下枪，把后面那一群不停笑着的学生给带离了这里。
+<</if>>
+<</nobr>>
+
+[[离开枪械训练区|Training Camp-SupplyTeaching-FirstTime-SentinelResult]]
+:: Training Camp-SupplyTeaching-FirstTime-SentinelResult
+总之，这次教学没出任何意外。
+
+你回到楼内的办公处，员工确认那些学生没有任何问题后就在你的档案里加上了一次成功记录。
+
+
+<<link "离开">>
+    <<set $PlayerWorkAsSupplySentinelTeacherSucceed += 1>>
+    <<goto "Training Camp">>
+<</link>>
+:: Training Camp-SupplyTeaching-FirstTime-Guide
+你来到楼内的办公处，询问他们有没有什么地方需要临时代课的。
+
+“向导吗？”办公处的员工确认了一次，“今天有一群刚到的学员，要学习基础理论知识。”
+
+“你带不带？”
+
+<span style="opacity: 0.5">在你作为教官积累足够的经验之前，你无法招收自己的学生，只能临时为一些人授课。
+
+如果你合格地完成了多次授课，你最终就可以获得招收自己学生的资格。由于为哨兵和向导教学分别需要不同的资质，你在两边累积的授课记录不能互通。
+
+你只有在职位为教官的情况下才可以招收自己的学生。尽管如此，在任何职业下，你都可以随时来帮助临时授课。
+
+本次作为教学，你可以百分百成功地累积一次授课经验。然而，之后的授课都需要你自己的能力发挥。
+
+如果你不想获得白送的成功次数，你可以选择拒绝任务。</span>
+
+
+[[接受任务|Training Camp-SupplyTeaching-FirstTime-GuideStart]]
+
+[[拒绝|Training Camp-SupplyTeaching-FirstTime-Decline]]
+:: Training Camp-SupplyTeaching-FirstTime-GuideStart
+几分钟后，你走进了指定的教室。里面有一群向导学生正在无所事事地等待。
+
+你开始为他们讲解那些理论知识。都是些枯燥、无聊的东西，但因为它们很重要，你尽量让它们听起来有趣。
+<<nobr>>
+<<set _x to random(1,50)>>
+<<if _x gt $CommunicateSkillLevel>>
+他们似乎不感兴趣，一边听一边打哈欠。你对此也没什么办法。
+<<else>>
+你的努力似乎起了效果。那些学生感兴趣的目光逐渐聚焦过来，津津有味地听着你的讲解。
+<br><br>
+你对如何引起人们的注意有了更好的理解。<<setStat "CommunicateSkillLevel" +=3>><<showChange "语言沟通" "+" 1 "green">>
+<</if>>
+<</nobr>>
+不知不觉间，课程时间就结束了。
+
+
+[[继续|Training Camp-SupplyTeaching-FirstTime-GuideResult]]
+:: Training Camp-SupplyTeaching-FirstTime-GuideResult
+你回到楼内的办公处。员工确认那些学生的确学到了预定的知识后，就在你的档案里加上了一次成功记录。
+
+
+<<link "离开">>
+    <<set $PlayerWorkAsSupplyGuideTeacherSucceed += 1>>
+    <<goto "Training Camp">>
+<</link>>
+:: Training Camp-SupplyTeaching-FirstTime-Decline
+你拒绝了这次任务。她抬头奇怪地看了你一眼，但没说什么。
+
+你离开了。
+
+
+[[返回|Training Camp]]
+:: Training Camp-SupplyTeaching-Sentinel
+
+:: Training Camp-SupplyTeaching-Guide

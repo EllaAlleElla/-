@@ -1,4 +1,4 @@
-:: Widgets [widget]
+:: Widgets [widget nobr]
 
 /*便捷设置带上限的新数值*/
 <<widget "capStat">>
@@ -26,6 +26,7 @@
 
 /*显示数值变化*/
 <<widget "showChange">>
+    <<nobr>>
     <<set _label = _args[0]>>
     <<set _sign = _args[1]>>
     <<set _level = _args[2]>>
@@ -35,7 +36,8 @@
     <<else>>
         <<set _symbol = "-".repeat(_level)>>
     <</if>>
-    <span style="color: _color;">（_symbol _label）</span>
+    <span @style="'color: ' + _color + ';'">（_symbol _label）</span>
+    <</nobr>>
 <</widget>>
 
 /* 显示玩家评级 */

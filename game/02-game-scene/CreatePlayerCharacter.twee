@@ -884,4 +884,7 @@
 
 “下次再不正脸看人，就不是踢一下桌子那么简单了。”你冷笑一声离去。
 <</if>>
-[[先回宿舍吧|Player Dormitory]]
+<<link "先回宿舍吧">>
+    <<setStat "SpiritualPowerRemain" += 10000>>
+    <<goto "Player Dormitory">>
+<</link>>
